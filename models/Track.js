@@ -3,9 +3,9 @@ var mongoose = require('mongoose'),
 
 // define the schema for our user model
 var trackSchema = mongoose.Schema({
-    _id         : ShortId,
-    title       : { type: String, index: true },
-    artist      : { type: String, index: true },
+    _id         : { type: ShortId, index: true },
+    title       : { type: String },
+    artist      : { type: String },
     album       : {
         title   : String
     },

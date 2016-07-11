@@ -15,10 +15,12 @@ var compression = require('compression'),
     socket = require('./lib/socket.js'),
     flash = require('connect-flash'),
     config = require('./config/default.js'),
-    library = require('./lib/library.js')
+    library = require('./lib/library.js'),
+    channels = require('./lib/channels.js');
 
 
-library.add('Graceland', 'Paul Simon');
+// library.add('Graceland', 'Paul Simon');
+// channels.add('Metal mash');
 
 // Connect to MongoDB
 mongoose.connect(config.storage.mongo.url);
@@ -47,11 +49,11 @@ app.use(compression());
 app.use(express.static('client/static'));
 
 // Helmet
-app.use(helmet({dnsPrefetchControl: false}));
-app.use(helmet.contentSecurityPolicy({
-    directives: config.site.csp,
-    browserSniff: false
-}));
+// app.use(helmet({dnsPrefetchControl: false}));
+// app.use(helmet.contentSecurityPolicy({
+//     directives: config.site.csp,
+//     browserSniff: false
+// }));
 
 // Passport setup
 app.use(cookieParser());

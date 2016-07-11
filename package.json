@@ -24,6 +24,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
+    "colors": "^1.1.2",
     "compression": "^1.6.0",
     "config": "1.15.x",
     "connect-flash": "^0.1.1",
