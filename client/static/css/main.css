@@ -1,0 +1,830 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    
+    color: #286aab;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#282828+0,0e0e0e+99 */
+    background: rgb(40,40,40); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, rgba(40,40,40,1) 0%, rgba(14,14,14,1) 99%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(40,40,40,1)), color-stop(99%,rgba(14,14,14,1))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(40,40,40,1) 0%,rgba(14,14,14,1) 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, rgba(40,40,40,1) 0%,rgba(14,14,14,1) 99%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, rgba(40,40,40,1) 0%,rgba(14,14,14,1) 99%); /* IE10+ */
+    background: radial-gradient(ellipse at center, rgba(40,40,40,1) 0%,rgba(14,14,14,1) 99%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#282828', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+h1 {
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+input {
+    color: white;
+    padding: 6px;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+input::-webkit-input-placeholder {
+    color: #286aab;
+}
+
+
+#container,
+#player {
+    height: 100%;
+}
+
+
+
+/*****************************************************************************
+ *   
+ *   HOMEPAGE
+ *
+ *****************************************************************************/
+
+/* CHANNEL LIST */
+.channels {
+    width: 60%;
+    padding-top: 10%;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.channels.active {
+    opacity: 1;
+}
+
+.channels .channel {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    opacity: 1;
+    transition: opacity 0.3s, top 0.3s, left 0.3s;
+}
+
+.channels .channel--remove {
+    opacity: 0;
+}
+
+.channels .channel a {
+    text-decoration: none;
+    background: #151515;
+    display: block;
+}
+
+.channels .channel--active a,
+.channels .channel a:hover {
+    background: #173d63;
+}
+
+.channels .channel .channel-image {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.channels .channel--add-new .channel-image::after {
+    color: #202020;
+    content: "";
+    font-family: FontAwesome;
+    font-size: 100px;
+    left: 0;
+    line-height: 150px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+
+.channels .channel--add-new a:hover .channel-image::after {
+    color: #FFFFFF;
+}
+
+.channels .channel h3 {
+    padding: 8px;
+    color: #555555;
+    font-family: "Roboto",sans-serif;
+    line-height: 1.2em;
+}
+
+.channels .channel--active h3,
+.channels .channel a:hover h3 {
+    color: #FFFFFF;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .channels {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .channels .channel {
+        margin-bottom: 25px;
+    }
+}
+
+
+
+
+/*****************************************************************************
+ *   
+ *   PLAYER
+ *
+ *****************************************************************************/
+
+
+/* PLAYLIST */
+.lastfm-scrobble-active {
+    color: #D01F3C !important;
+}
+
+body.showing-playlist .lastfm-scrobble {
+    left: 400px;
+}
+
+/* SIDEBAR */
+#sidebar {
+    left: -900px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding-right: 50px;
+    transition: 0.3s;
+    z-index: 100;
+}
+
+#player.active #sidebar {
+    left: -390px;
+}
+
+.showing-sidebar #player.active #sidebar {
+    left: 0;
+}
+
+.sidebar-icons {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+.sidebar-icons i {
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.sidebar-icons > span {
+    float: left;
+    margin-left: 50px;
+    width: 150px;
+    color: #444;
+    margin-top: -25px;
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.sidebar-icons:hover > span {
+    opacity: 1;
+}
+
+
+.sidebar-content {
+    background: #173d63;
+    width: 390px;
+    padding: 20px;
+    color: white;
+    font-family: "raleway", sans-serif;
+    overflow-y: auto;
+    z-index: 100;
+    position: relative;
+    height: 100%;
+}
+
+#sidebar {
+    z-index: 100;
+}
+
+#sidebar h1 {
+    margin-top: 5px;
+    margin-bottom: 0.5em;
+    font-size: 31px;
+}
+
+
+#sidebar .tracklist-search {
+    border: 1px solid #173d63;
+    overflow: hidden;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    height: 50px;
+}
+
+#sidebar.show-search .tracklist-search {
+    border-color: white;
+    background: #173d63;
+}
+
+#sidebar .tracklist-search i {
+    line-height: 46px;
+    font-size: 22px;
+    color: #999999;
+    cursor: pointer;
+    position: relative;
+    float: right;
+    margin-right: 5px;
+    z-index: 2;
+}
+
+#sidebar .tracklist-search i:hover {
+    color: white;
+}
+
+#sidebar input {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 22px;
+    padding-right: 42px;
+    padding-left: 10px;
+}
+
+#sidebar.show-search input {
+    display: block;
+}
+
+
+
+#sidebar ul {
+    list-style: none;
+    margin: 0;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+#sidebar ul li {
+    font-weight: 300;
+    padding: 2px 0;
+    font-size: 0.9em;
+}
+
+#sidebar ul li.autoqueue {
+    color: #999999;
+}
+
+#sidebar ul li.artist-list {
+    padding: 6px 0;
+    font-weight: 500;
+}
+
+#sidebar ul li li {
+    font-size: 1em;
+    margin-left: 20px;
+}
+
+#sidebar ul li li:first-child {
+    padding-top: 4px;
+}
+
+#sidebar ul li li strong {
+    font-weight: 300;
+}
+
+#sidebar ul li.letter {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin: 25px -20px 6px;
+    padding: 4px 20px;
+    background: white;
+    color: #286aab;
+}
+
+#sidebar ul li strong {
+    font-weight: 500;
+}
+
+#sidebar ul li a {
+    color: #999999;
+    float: right;
+    outline: none;
+}
+
+#sidebar ul li a.play-youtube {
+    margin-right: -10px;
+    margin-left: 8px;
+}
+
+#sidebar ul li a.queue-add {
+    margin-left: 5px;
+}
+
+#sidebar ul li a:hover {
+    color: white;
+}
+
+#sidebar ul.sidebar-tracklist-letters {
+    margin: 0;
+}
+
+#sidebar ul.sidebar-tracklist-letters li {
+    display: inline-block;
+    cursor: pointer;
+    width: 22px;
+    text-align: center;
+}
+
+#sidebar ul.sidebar-tracklist-letters li:hover {
+    font-weight: 500;
+}
+
+#sidebar .back-to-top {
+    background: #000000 none repeat scroll 0 0;
+    border-radius: 40px;
+    bottom: 10px;
+    height: 40px;
+    left: 10px;
+    opacity: 0.4;
+    position: fixed;
+    width: 40px;
+    cursor: pointer;
+    display: none;
+    transition: 0.3s;
+}
+
+#sidebar .back-to-top:hover {
+    opacity: 1;
+}
+
+#sidebar .back-to-top i {
+    display: block;
+    font-size: 20px;
+    line-height: 35px;
+    text-align: center;
+    width: 38px;
+}
+
+
+#player .channel-info {
+    background: #151515;
+    position: relative;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    width: 350px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#player .channel-quit {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 40px;
+    color: #555555;
+    background: #222222;
+    padding-right: 4px;
+    cursor: pointer;
+}
+
+#player .channel-quit:hover {
+    background: #173D63;
+}
+
+#player .channel-quit i {
+    font-size: 25px;
+    line-height: 50px;
+    padding-top: 0;
+    transition: 0;
+}
+
+#player .channel-quit:hover i {
+    color: #FFFFFF;
+}
+
+#player .channel-image {
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    left: 40px;
+    position: absolute;
+    top: 0;
+    width: 60px;
+}
+
+#player .channel-info-details {
+    color: #555555;
+    font-size: 0.8em;
+    padding: 8px 15px;
+    margin-left: 100px;
+    cursor: pointer;
+}
+
+#player .channel-info-details:hover {
+    background: #173D63;
+    color: #999;
+}
+
+#player .channel-info h3 {
+    color: #286aab;
+    font-size: 1.5em;
+    padding-bottom: 2px;
+}
+
+#player .channel-info-details:hover h3 {
+    color: white;
+}
+
+
+
+
+#search {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 280px;
+    z-index: 10;
+}
+
+#search .search-container {
+    border: 1px solid #173d63;
+    position: relative;
+}
+
+#search .search-container input {
+    width: 100%;
+    padding-right: 30px;
+}
+
+#search .search-container i {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    color: #173d63;
+}
+
+
+#search .search-results {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#search .search-results li {
+    margin-top: 1px;
+    background: #173d63;
+    overflow: hidden;
+    padding: 6px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#search .search-results li.no-results {
+    font-weight: 400;
+    color: white;
+    cursor: default;
+    font-size: 0.9em;
+}
+
+#search .search-results li.added {
+    border-left: 4px solid #208820;
+    margin-left: -4px;
+    cursor: default;
+}
+
+#search .search-results li:not(.added):not(.no-results):hover {
+    background: #1d4c7c;
+}
+
+#search .search-results li:not(.added):not(.no-results):hover i {
+    opacity: 1;
+}
+
+#search .search-results li h3,
+#search .search-results li strong {
+    margin: 0;
+    margin-left: 45px;
+    display: block;
+}
+
+#search .search-results li h3 {
+    font-size: 14px;
+    color: #eef;
+    margin-bottom: 4px;
+}
+
+#search .search-results li strong {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+#search .search-results li img {
+    float: left;
+    width: 36px;
+    height: 36px;
+}
+
+#search .search-results li i {
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    font-size: 32px;
+    line-height: 35px;
+    color: white;
+    opacity: 0;
+    transition: 0.2s;
+    text-shadow: 0 0 4px #1d4c7c;
+}
+
+
+.track-container {
+    opacity: 0;
+    position: relative;
+    top: 50%;
+    margin-top: -260px;
+    text-align: center;
+    transition: opacity 0.5s, left 0.3s;
+    left: 0;
+}
+
+#player.active .track-container {
+    opacity: 1;
+}
+
+.showing-sidebar .track-container  {
+    left: 200px;
+}
+
+.track-details {
+    text-align: center;
+}
+
+.track-details h1,
+.track-details h3 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.track-details h1 {
+    font-size: 32px
+}
+
+.track-details h3 {
+    font-size: 1.17em;
+    font-weight: 300;
+}
+
+.track-details .album-art {
+    margin-bottom: 8px;
+    position: relative;
+    display: inline-block;
+
+    transition:; 0.5s;
+}
+
+.track-details .album-art img {
+    width: 300px;
+    height: 300px;
+    float: left;
+    background: #151515;
+}
+
+.track-details .album-art img::after {
+    content: "";
+    font-family: FontAwesome;
+    font-size: 100px;
+    line-height: 300px;
+    width: 100%;
+    color: #202020;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.track-details .album-art .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #286aab;
+    width: 0;
+}
+
+.track-details h3 {
+    margin-top: 4px;
+    color: #555555;
+}
+
+
+.track-controls {
+    text-align: center;
+}
+
+.track-controls .control {
+    position: relative;
+    display: inline-block;
+    margin: 1em;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 1.4em;
+    transition: color 0.7s;
+    cursor: pointer;
+    
+    font-size: 2em;
+    color: #173d63;
+}
+
+.track-controls .control:hover {
+    color: #286aab;
+}
+
+.track-controls .control-active {
+    color: white !important;
+}
+
+.track-controls .control-deactive {
+    color: #444;
+}
+
+.track-controls .control .count {
+    position: absolute;
+    top: 0px;
+    left: 26px;
+    background: #286aab;
+    border-radius: 100px;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    color: white;
+    font-size: 11px;
+    text-align: center;
+    display: none;
+}
+
+.track-controls .control--like .count {
+    left: auto;
+    right: 26px;
+}
+
+.track-controls .control::before {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    margin: -4px 0 0 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(111,148,182,0.3);
+    content: '';
+    opacity: 0;
+    -webkit-transform-origin: 35px 50%;
+    transform-origin: 35px 50%;
+}
+
+
+.concert {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    padding: 8px 15px;
+    background: #151515;
+    max-width: 250px;
+    text-decoration: none;
+}
+
+.concert:hover {
+    background: #222222;
+}
+
+.concert strong {
+    color: #286aab;
+}
+
+
+
+@media screen and (max-width: 500px) {
+    #search {
+        width: auto;
+        left: 10px;
+        bottom: 10px;
+       top: auto;
+    }
+
+    .concert {
+        display: none !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*****************************************************************************
+ *   
+ *   MISC
+ *
+ *****************************************************************************/
+
+.loader:before,
+.loader:after,
+.loader {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    margin-left: -1.25em;
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation: load7 1.8s infinite ease-in-out;
+    animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 5.75em;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #286aab;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #286aab;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #286aab;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #286aab;
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Grooveshare",
+  "description": "An experimental collaborative listening experience",
+  "version": "2.0.0",
+  "homepage": "https://github.com/0x6C77/Grooveshare",
+  "keywords": [
+    "music"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0x6C77/Grooveshare"
+  },
+  "author": {
+    "name": "Luke Ward",
+    "email": "lukewward@gmail.com",
+    "url": "https://github.com/0x6C77/Grooveshare"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/0x6C77/Grooveshare/blob/master/LICENSE.md"
+    }
+  ],
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.0",
+    "config": "1.15.x",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.2.0",
+    "cookie-parser": "^1.4.3",
+    "express": "4.13.x",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.14.0",
+    "ffmpeg": "0.0.4",
+    "hbs": "^4.0.0",
+    "helmet": "^2.1.1",
+    "highlight.js": "9.0.0",
+    "mongoose-autopopulate": "^0.4.0",
+    "mongoose-shortid-nodeps": "^0.6.4",
+    "node-2fa": "^1.0.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-github": "^1.1.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
+    "request": "^2.72.0",
+    "socket.io": "^1.4.8",
+    "youtube-search": "^1.0.4",
+    "youtuber": "^2.0.1",
+    "ytdl-core": "^0.7.16"
+  },
+  "readmeFilename": "README.md"
+}
