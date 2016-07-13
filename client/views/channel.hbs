@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <title>{{ channel.title }} | {{ title }}</title>
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/responsive.gs.24col.css">
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/fonts.css">
+
+        <link rel="stylesheet" href="css/toastr.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/respond.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src='/socket.io/socket.io.js'></script>
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="player" class="active">
+                <audio></audio>
+                <div id="sidebar">
+                    <div class="sidebar-content">
+                        <div class="tracklist-search">
+                            <input type="text" placeholder="Search" autocomplete="off"/>
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </div>
+                    <div class="sidebar-icons">
+                        <div class="channel-info show-sidebar">
+                            <div class="channel-image" style="background-image: url('/images/channels/{{ channel.id }}.jpg');"></div>
+                            <div class="channel-info-details">
+                                <h3>{{ channel.title }}</h3>
+                                <span class="channel-info-songs">{{ channel.tracks.length }}</span> Songs |
+                                <span class="channel-info-listeners">{{ channel.listeners }}</span> Listeners
+                            </div>
+                        </div>
+                        <i class="fa fa-volume-off toggle-mute"></i>
+                        <span>Toggle mute</span>
+                        <i class="fa fa-lastfm-square lastfm-scrobble {{#if scrobbling}}lastfm-scrobble-active{{/if}}"></i>
+                        <span>Enable scrobbling</span>
+                    </div>
+                </div>
+                
+                <div id="search">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search" autocomplete="off"/>
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                
+                <div class="track-container">
+                    <div class="track-details">
+                        <div class="album-art">
+                            <img src="" alt=""/>
+                            <div class="progress"></div>
+                        </div>
+                        <h1 class="track"></h1>
+                        <h3 class="artist"></h3>
+                    </div>
+                    <div class="track-controls">
+                        <span class="control control--like"><i class="fa fa-thumbs-up"></i><span class="count">0</span></span>
+                        <span class="control control--dislike"><i class="fa fa-thumbs-down"></i><span class="count">0</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src='/js/handlebars-v3.0.3.js'></script>
+        <script src='/js/toastr.min.js'></script>
+        <script src="/js/main.js"></script>
+        <script src="/js/channel.js"></script>
+    </body>
+</html>

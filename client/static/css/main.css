@@ -409,38 +409,11 @@ body.showing-playlist .lastfm-scrobble {
     margin-bottom: 5px;
 }
 
-#player .channel-quit {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 40px;
-    color: #555555;
-    background: #222222;
-    padding-right: 4px;
-    cursor: pointer;
-}
-
-#player .channel-quit:hover {
-    background: #173D63;
-}
-
-#player .channel-quit i {
-    font-size: 25px;
-    line-height: 50px;
-    padding-top: 0;
-    transition: 0;
-}
-
-#player .channel-quit:hover i {
-    color: #FFFFFF;
-}
-
 #player .channel-image {
     background-position: center center;
     background-size: cover;
     height: 100%;
-    left: 40px;
+    left: 0px;
     position: absolute;
     top: 0;
     width: 60px;
@@ -450,7 +423,7 @@ body.showing-playlist .lastfm-scrobble {
     color: #555555;
     font-size: 0.8em;
     padding: 8px 15px;
-    margin-left: 100px;
+    margin-left: 60px;
     cursor: pointer;
 }
 

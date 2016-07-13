@@ -6,7 +6,9 @@ $(function() {
 
     socket.on('channels.list', function(data) {
         channels = data;
-        renderChannelList(data);
+        if (!$('#player').length) {
+            renderChannelList(data);
+        }
     });
 
 
