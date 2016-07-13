@@ -12,9 +12,9 @@ $(function() {
 
     var tmplChannelList = '<ul class="channels container row gutters">\
                                 {{#each .}}\
-                                    <li class="channel col span_6" data-channel-id="{{ _id }}" data-channel-slug="{{ slug }}">\
+                                    <li class="channel col span_6" data-channel-id="{{ id }}" data-channel-slug="{{ slug }}">\
                                         <a href="#">\
-                                            <div class="channel-image" style="background-image: url(\'/images/channels/{{ _id }}.jpg\');"></div>\
+                                            <div class="channel-image" style="background-image: url(\'/images/channels/{{ id }}.jpg\');"></div>\
                                             <h3>{{ title }}</h3>\
                                         </a>\
                                     </li>\

@@ -15,12 +15,17 @@ var compression = require('compression'),
     socket = require('./lib/socket.js'),
     flash = require('connect-flash'),
     config = require('./config/default.js'),
-    library = require('./lib/library.js'),
-    channels = require('./lib/channels.js');
+    channels = require('./lib/channels.js'),
+    library = require('./lib/library.js');
 
 
 // library.add('Graceland', 'Paul Simon');
-// channels.add('Metal mash');
+// channels.create('Friday!');
+// channels.addSong('metal-mash', 'Tender', 'Blur').then(function() {
+//     console.log('Woo we did it');
+// }, function() {
+//     console.log('Boo');
+// });
 
 // Connect to MongoDB
 mongoose.connect(config.storage.mongo.url);
@@ -46,6 +51,8 @@ app.set('views', __dirname + '/client/views');
 app.use(compression());
 
 // Serve static files
+app.use('/images', express.static('data/images'));
+app.use('/music', express.static('data/music'));
 app.use(express.static('client/static'));
 
 // Helmet
