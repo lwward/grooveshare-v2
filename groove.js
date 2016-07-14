@@ -1,7 +1,8 @@
 // Store base folder path
 global.__base = __dirname + '/';
 
-var compression = require('compression'),
+var fs = require('fs'),
+    compression = require('compression'),
     express = require('express'),
     expressSession = require('express-session'),
     mongoStore = require('connect-mongo')(expressSession),
@@ -14,18 +15,27 @@ var compression = require('compression'),
     passport = require('passport'),
     socket = require('./lib/socket.js'),
     flash = require('connect-flash'),
-    config = require('./config/default.js'),
     channels = require('./lib/channels.js'),
     library = require('./lib/library.js');
 
 
-// library.add('Graceland', 'Paul Simon');
+// library.add('Sorry you\'re sick', 'Ted Hawkins');
 // channels.create('Friday!');
-// channels.addSong('metal-mash', 'Tender', 'Blur').then(function() {
+// channels.addSong('metal-mash', 'Porcelain', 'Moby').then(function() {
 //     console.log('Woo we did it');
 // }, function() {
 //     console.log('Boo');
 // });
+
+
+
+// Check and load config
+var config = require('./config/default.js');
+
+// Create folder structure
+if (!fs.existsSync('./data')){
+    fs.mkdirSync('./data');
+}
 
 // Connect to MongoDB
 mongoose.connect(config.storage.mongo.url);

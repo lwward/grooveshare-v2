@@ -12,6 +12,11 @@ $(function() {
     });
 
 
+    socket.on('channel.play', function(data) {
+        console.log(data);
+    });
+
+
     var tmplChannelList = '<ul class="channels container row gutters">\
                                 {{#each .}}\
                                     <li class="channel col span_6" data-channel-id="{{ id }}" data-channel-slug="{{ slug }}">\

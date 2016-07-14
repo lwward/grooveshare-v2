@@ -10,9 +10,11 @@ var trackSchema = mongoose.Schema({
         title   : String
     },
     meta        : {
-        lastfm  : String,
-        mbid    : String,
-        youtube : String
+        duration    : String,
+        bitrate     : String,
+        lastfm      : String,
+        mbid        : String,
+        youtube     : String
     }
 });
 
