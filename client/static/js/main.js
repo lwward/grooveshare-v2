@@ -1,19 +1,29 @@
-$(function() {
-    var baseURI = '/',
-        socket  = io(),
-        $container = $('#container');  
+var baseURI = '/',
+    socket  = io(),
+    $container = $('#container');
 
+$(function() {
+    Handlebars.getTemplate = function(name) {
+        if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
+            $.ajax({
+                url : 'views/' + name + '.hbs',
+                success : function(data) {
+                    if (Handlebars.templates === undefined) {
+                        Handlebars.templates = {};
+                    }
+                    Handlebars.templates[name] = Handlebars.compile(data);
+                },
+                async : false
+            });
+        }
+        return Handlebars.templates[name];
+    };
 
     socket.on('channels.list', function(data) {
         channels = data;
         if (!$('#player').length) {
             renderChannelList(data);
         }
-    });
-
-
-    socket.on('channel.play', function(data) {
-        console.log(data);
     });
 
 
@@ -62,11 +72,10 @@ $(function() {
                 }, 10);
 
                 document.title = title + ' | Grooveshare';
-                window.history.pushState({"url": slug, "pageTitle": document.title}, "", slug);
+                // window.history.pushState({"url": slug, "pageTitle": document.title}, "", slug);
             }, 50);
 
-            // Connect to channel
-            socket.emit('channel.join', $parent.data('channel-id'));
+            new channel($parent.data('channel-id'));
         });
 
         setTimeout(function() {

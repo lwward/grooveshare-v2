@@ -399,7 +399,6 @@ body.showing-playlist .lastfm-scrobble {
     width: 38px;
 }
 
-
 #player .channel-info {
     background: #151515;
     position: relative;
@@ -427,9 +426,11 @@ body.showing-playlist .lastfm-scrobble {
     cursor: pointer;
 }
 
+#player .channel-image:hover + .channel-info-details,
 #player .channel-info-details:hover {
     background: #173D63;
     color: #999;
+    cursor: pointer;
 }
 
 #player .channel-info h3 {
@@ -438,6 +439,7 @@ body.showing-playlist .lastfm-scrobble {
     padding-bottom: 2px;
 }
 
+#player .channel-image:hover + .channel-info-details h3,
 #player .channel-info-details:hover h3 {
     color: white;
 }

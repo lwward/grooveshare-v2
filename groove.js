@@ -63,6 +63,7 @@ app.use(compression());
 // Serve static files
 app.use('/images', express.static('data/images'));
 app.use('/music', express.static('data/music'));
+app.use('/views', express.static('client/views'));
 app.use(express.static('client/static'));
 
 // Helmet
