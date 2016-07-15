@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="auth-nav">
+        <a href='/auth/logout'>&lt; cancel</a>
+    </div>
+    <div class="auth-local">
+        <div class="auth-local-2fa active">
+            {{#if 2fa.message}}
+                <div class="message message--error">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    <div>{{ 2fa.message }}</div>
+                </div>
+            {{/if}}
+
+            <form action="/auth" method="post">
+                <p>Please enter your two-factor authentication code.</p>
+                <div class="input">
+                    <label for="code">Code</label>
+                    <input type="number" name="code" id="code" placeholder="Code" autocomplete="off">
+                </div>
+
+                <div class="row-fluid">
+                    <div class="offset6 col6">
+                        <button type="submit" class="btn">Authenticate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

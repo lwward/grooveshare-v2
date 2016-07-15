@@ -1,7 +1,6 @@
 var utils = require('../lib/utils.js'),
     // tokenStore = require('../lib/tokenStore.js'),
-    // users = require('../lib/users.js'),
-    twoFactor = require('node-2fa'),
+    users = require('../lib/users.js'),
     User = require('../models/User');
     // emailer = require('../lib/emailer');
 
@@ -10,12 +9,11 @@ var extra = {
 }
 
 module.exports = function(app, passport) {
+
     app.get('/auth', utils.isNotAuthenticated, function(req, res) {
-        if (req.session.loginUser) {
-            res.render('auth-2fa', { extra: extra }); 
-        } else if (req.session.newUser) {
+        if (req.session.newUser) {
             // Handle new users setting up their account
-            res.render('auth-setup', {
+            res.render('auth/setup', {
                 newUser: req.session.newUser,
                 extra: extra
             }); 
@@ -23,20 +21,6 @@ module.exports = function(app, passport) {
             res.render('auth', { login: { message: req.flash('error') }, extra: extra }); 
         }
     });
-
-    // 2FA
-    app.post('/auth', utils.isNotAuthenticated, function(req, res, next) {
-        if (req.session.loginUser) {
-            if (req.body.code) {
-                check2FA(req, res);
-            } else {
-                res.render('auth-2fa', { extra: extra }); 
-            }
-        } else {
-            next(); // Continue to passport authentication
-        }
-    });
-
     // Password recovery
     app.post('/auth/forgot', utils.isNotAuthenticated, function(req, res, next) {
         if (req.body.forgot) {
@@ -72,7 +56,6 @@ module.exports = function(app, passport) {
         if (req.session.newUser) {
             var username = req.body.username;
             var email = req.body.email;
-            var gender = req.body.gender;
             if (username) {
                 // Check username is available
                 users.checkUsername(username, function(valid) {
@@ -81,7 +64,6 @@ module.exports = function(app, passport) {
                         newUser.username = username;
                         newUser.email = email;
                         newUser.profile = req.session.newUser.profile;
-                        newUser.profile.gender = gender;
                         newUser.auth = req.session.newUser.auth;
 
                         newUser.save(function(err) {
@@ -158,31 +140,5 @@ module.exports = function(app, passport) {
             res.redirect('/');
         }
     });
-
-
-    // Handle 2FA
-    function check2FA(req, res) {
-        var id = req.session.loginUser,
-            code = req.body.code;
-
-        User.findOne({ '_id' : id }, function(err, user) {
-            if (err) {
-                console.log(err);
-            }
-
-            if (user.validateTwoFactor(user.auth.local.twoFactor, code)) {
-                // Remove session
-                delete req.session.loginUser;
-
-                // Login user
-                req.login(user, function(err) {
-                    if (err) { return next(err); }
-                    return res.redirect('/course');
-                });
-            } else {
-                res.render('auth-2fa', { '2fa': { message: 'Invalid code' }, extra: extra });
-            }
-        });
-    }
 
 };

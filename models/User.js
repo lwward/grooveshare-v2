@@ -9,6 +9,9 @@ var userSchema = mongoose.Schema({
     username    : { type: String,  unique: true },
     email       : { type: String,  unique: true },
     auth        : {
+        local            : {
+            password     : String,
+        },
         facebook         : {
             id           : String,
             token        : String,
@@ -27,6 +30,19 @@ var userSchema = mongoose.Schema({
         }
     }
 });
+
+
+// methods ======================
+// generating a hash
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.auth.local.password);
+};
+
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

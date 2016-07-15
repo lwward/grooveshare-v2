@@ -21,7 +21,7 @@ var fs = require('fs'),
 
 // library.add('Sorry you\'re sick', 'Ted Hawkins');
 // channels.create('Friday!');
-// channels.addSong('metal-mash', 'Porcelain', 'Moby').then(function() {
+// channels.addSong('metal-mash', 'Double nature', 'Mustasch').then(function() {
 //     console.log('Woo we did it');
 // }, function() {
 //     console.log('Boo');
@@ -107,5 +107,5 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-require('./routes/site')(app);
 require('./routes/auth')(app, passport);
+require('./routes/site')(app);

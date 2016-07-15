@@ -23,7 +23,11 @@
     </head>
 
     <body>
-        
+
+        {{#if user}}
+            <div id="user" style="background-image: url('{{ user.avatar }}');"></div>
+        {{/if}}
+
         <div id="container">
 
         </div>
