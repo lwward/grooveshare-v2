@@ -87,6 +87,7 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+require('./lib/passport')(passport);
 
 // Setup default variables
 app.use(function (req, res, next) {
@@ -107,3 +108,4 @@ app.use(function (req, res, next) {
 
 // Routes
 require('./routes/site')(app);
+require('./routes/auth')(app, passport);
