@@ -4,9 +4,7 @@ var utils = require('../lib/utils.js'),
     User = require('../models/User');
     // emailer = require('../lib/emailer');
 
-var extra = {
-    classes: ['auth']
-}
+var classes = ['auth'];
 
 module.exports = function(app, passport) {
 
@@ -15,10 +13,10 @@ module.exports = function(app, passport) {
             // Handle new users setting up their account
             res.render('auth/setup', {
                 newUser: req.session.newUser,
-                extra: extra
+                classes: classes
             }); 
         } else {
-            res.render('auth', { login: { message: req.flash('error') }, extra: extra }); 
+            res.render('auth', { login: { message: req.flash('error') }, classes: classes }); 
         }
     });
     // Password recovery
@@ -48,7 +46,7 @@ module.exports = function(app, passport) {
     });
 
     app.all('/auth/forgot', utils.isNotAuthenticated, function(req, res) {
-        res.render('auth/forgot', { message: req.flash('error'), extra: extra }); 
+        res.render('auth/forgot', { message: req.flash('error'), classes: classes }); 
     });
 
     // Finalize account
@@ -79,11 +77,11 @@ module.exports = function(app, passport) {
                         });
 
                     } else {
-                        res.render('auth-setup', { username: username, message: valid?'perfect':'Username is not available', extra: extra });
+                        res.render('auth-setup', { username: username, message: valid?'perfect':'Username is not available', classes: classes });
                     }
                 });
             } else {
-                res.render('auth-setup', { username: req.session.newUser.username, extra: extra });
+                res.render('auth-setup', { username: req.session.newUser.username, classes: classes });
             }
         } else {
             next(); // Continue to passport authentication
@@ -92,18 +90,18 @@ module.exports = function(app, passport) {
 
     // Login
     app.post('/auth', utils.isNotAuthenticated, passport.authenticate('local-login', {
-        successRedirect : '/course',
+        successRedirect : '/',
         failureRedirect : '/auth',
         failureFlash : true,
         failWithError: true
     }));
 
     app.get('/auth/signup', utils.isNotAuthenticated, function(req, res) {
-        res.render('auth', { signup: { message: req.flash('error') }, extra: extra }); 
+        res.render('auth', { signup: { message: req.flash('error') }, classes: classes }); 
     });
 
     app.post('/auth/signup', utils.isNotAuthenticated, passport.authenticate('local-signup', {
-        successRedirect : '/course',
+        successRedirect : '/',
         failureRedirect : '/auth/signup',
         failureFlash : true
     }));
@@ -111,21 +109,21 @@ module.exports = function(app, passport) {
     // Twitter
     app.get('/auth/twitter', utils.isNotAuthenticated, passport.authenticate('twitter', { scope : ['profile', 'email'] }));
     app.get('/auth/twitter/callback', utils.isNotAuthenticated, passport.authenticate('twitter', {
-        successRedirect : '/course',
+        successRedirect : '/',
         failureRedirect : '/'
     }));
 
     // Google
     app.get('/auth/google', utils.isNotAuthenticated, passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get('/auth/google/callback', utils.isNotAuthenticated, passport.authenticate('google', {
-        successRedirect : '/course',
+        successRedirect : '/',
         failureRedirect : '/'
     }));
 
     // Github
     app.get('/auth/github', utils.isNotAuthenticated, passport.authenticate('github'));
     app.get('/auth/github/callback', utils.isNotAuthenticated, passport.authenticate('github', {
-        successRedirect : '/course',
+        successRedirect : '/',
         failureRedirect : '/'
     }));
 

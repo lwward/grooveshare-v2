@@ -1,74 +1,71 @@
-<div class="container">
-    <div class="auth-nav">
-        <a href='/'>&lt; back to site</a>
+<div class="auth-nav">
+    <a href='/'>&lt; back to site</a>
+</div>
+<ul class="auth-tabs">
+    <li class="{{#if login}}active{{/if}}" data-target="auth-local-login"><h1>Log in</h1></li>
+    <li class="{{#if signup}}active{{/if}}" data-target="auth-local-signup"><h1>Sign up</h1></li>
+</ul>
+<div class="auth-local">
+    <div class="auth-local-login {{#if login}}active{{/if}}">
+        {{#if login.message}}
+            <div class="message message--error">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <div>{{ login.message }}</div>
+            </div>
+        {{/if}}
+
+        <form action="/auth" method="post">
+            <div class="input">
+                <label for="login-username">Username</label>
+                <input type="text" name="username" id="login-username" placeholder="Username">
+            </div>
+            <div class="input">
+                <label for="login-password">Password</label>
+                <input type="password" name="password" id="login-password" placeholder="Password">
+            </div>
+
+            <div class="row">
+                <div class="col span_12">
+                    <a href="/auth/forgot" class="btn btn--quiet">Forgotten password?</a>
+                </div>
+                <div class="col span_12">
+                    <button type="submit" class="btn">Log in</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <ul class="auth-tabs">
-        <li class="{{#if login}}active{{/if}}" data-target="auth-local-login"><h1>Log in</h1></li>
-        <li class="{{#if signup}}active{{/if}}" data-target="auth-local-signup"><h1>Sign up</h1></li>
-    </ul>
-    <div class="auth-local">
-        <div class="auth-local-login {{#if login}}active{{/if}}">
-            {{#if login.message}}
-                <div class="message message--error">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    <div>{{ login.message }}</div>
-                </div>
-            {{/if}}
+    <div class="auth-local-signup {{#if signup}}active{{/if}}">
+        {{#if signup.message}}
+            <div class="message message--error">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <div>{{ signup.message }}</div>
+            </div>
+        {{/if}}
 
-            <form action="/auth" method="post">
-                <div class="input">
-                    <label for="login-username">Username</label>
-                    <input type="text" name="username" id="login-username" placeholder="Username">
-                </div>
-                <div class="input">
-                    <label for="login-password">Password</label>
-                    <input type="password" name="password" id="login-password" placeholder="Password">
-                </div>
+        <form action="/auth/signup" method="post">
+            <div class="input">
+                <label for="signup-username">Username</label>
+                <input type="text" name="username" id="signup-username" placeholder="Username">
+            </div>
+            <div class="input">
+                <label for="signup-email">Email</label>
+                <input type="email" name="email" id="signup-email" placeholder="Email">
+            </div>
+            <div class="input">
+                <label for="signup-password">Password</label>
+                <input type="password" name="password" id="signup-password" placeholder="Password">
+            </div>
 
-                <div class="row">
-                    <div class="six columns">
-                        <a href="/auth/forgot" class="btn btn--quiet">Forgotten password?</a>
-                    </div>
-                    <div class="six columns">
-                        <button type="submit" class="btn">Log in</button>
-                    </div>
+            <div class="row">
+                <div class="col span_12">
+                    <button type="submit" class="btn">Sign up</button>
                 </div>
-            </form>
-        </div>
-        <div class="auth-local-signup {{#if signup}}active{{/if}}">
-            {{#if signup.message}}
-                <div class="message message--error">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    <div>{{ signup.message }}</div>
-                </div>
-            {{/if}}
-
-            <form action="/auth/signup" method="post">
-                <div class="input">
-                    <label for="signup-username">Username</label>
-                    <input type="text" name="username" id="signup-username" placeholder="Username">
-                </div>
-                <div class="input">
-                    <label for="signup-email">Email</label>
-                    <input type="email" name="email" id="signup-email" placeholder="Email">
-                </div>
-                <div class="input">
-                    <label for="signup-password">Password</label>
-                    <input type="password" name="password" id="signup-password" placeholder="Password">
-                </div>
-
-                <div class="row">
-                    <div class="six columns">
-                        <button type="submit" class="btn">Sign up</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-    <div class="auth-social">
-        <a href='/auth/facebook' class='auth-social--facebook'><i class="fa fa-facebook" aria-hidden="true"></i> Login with Facebook</a>
-        <a href='/auth/twitter' class="auth-social--twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
-        <a href='/auth/google' class='auth-social--google'><i class="fa fa-google" aria-hidden="true"></i> Login with Google</a>
-        <a href='/auth/github' class='auth-social--github'><i class="fa fa-github" aria-hidden="true"></i> Login with GitHub</a>
-    </div>
+</div>
+<div class="auth-social">
+    <a href='/auth/facebook' class='auth-social--facebook'><i class="fa fa-facebook" aria-hidden="true"></i> Login with Facebook</a>
+    <a href='/auth/twitter' class="auth-social--twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+    <a href='/auth/google' class='auth-social--google'><i class="fa fa-google" aria-hidden="true"></i> Login with Google</a>
 </div>

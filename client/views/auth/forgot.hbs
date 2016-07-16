@@ -1,29 +1,27 @@
-<div class="container">
-    <div class="auth-nav">
-        <a href='/auth'>&lt; back to login</a>
-    </div>
-    <div class="auth-local">
-        <div class="auth-local-forgot active">
-            {{#if message}}
-                <div class="message message--error">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    <div>{{ message }}</div>
-                </div>
-            {{/if}}
+<div class="auth-nav">
+    <a href='/auth'>&lt; back to login</a>
+</div>
+<div class="auth-local">
+    <div class="auth-local-forgot active">
+        {{#if message}}
+            <div class="message message--error">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <div>{{ message }}</div>
+            </div>
+        {{/if}}
 
-            <form method="post">
-                <p>To reset your password, enter your username or email address and we'll send you instructions on how to create a new password.</p>
-                <div class="input">
-                    <label for="forgot">Username / Email</label>
-                    <input type="text" name="forgot" id="forgot">
-                </div>
+        <form method="post">
+            <p>To reset your password, enter your username or email address and we'll send you instructions on how to create a new password.</p>
+            <div class="input">
+                <label for="forgot">Username / Email</label>
+                <input type="text" name="forgot" id="forgot">
+            </div>
 
-                <div class="row-fluid">
-                    <div class="offset6 col6">
-                        <button type="submit" class="btn">Submit</button>
-                    </div>
+            <div class="row">
+                <div class="col span_12">
+                    <button type="submit" class="btn">Submit</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>

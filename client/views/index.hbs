@@ -1,41 +1,18 @@
-<!doctype html>
-
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-        <title>{{ title }}</title>
-
-        <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/responsive.gs.24col.css">
-
-        <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,300' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/fonts.css">
-
-        <link rel="stylesheet" href="css/toastr.min.css">
-        <link rel="stylesheet" href="css/main.css">
-
-        <script src="js/respond.min.js"></script>
-        <script src="js/jquery.min.js"></script>
-        <script src='/socket.io/socket.io.js'></script>
-    </head>
-
-    <body>
-
-        {{#if user}}
-            <div id="user" style="background-image: url('{{ user.avatar }}');"></div>
-        {{/if}}
-
-        <div id="container">
-
-        </div>
-
-        <script src='/js/handlebars-v3.0.3.js'></script>
-        <script src='/js/toastr.min.js'></script>
-        <script src="/js/main.js"></script>
-        <script src="/js/channel.js"></script>
-        <script src="/js/player.js"></script>
-    </body>
-</html>
+<ul class="channels container row gutters active">
+    {{#each channels}}
+        <li class="channel col span_6" data-channel-id="{{ id }}" data-channel-slug="{{ slug }}">
+            <a href="#">
+                <div class="channel-image" style="background-image: url('/images/channels/{{ id }}.jpg');"></div>
+                <h3>{{ title }}</h3>
+            </a>
+        </li>
+    {{/each}}
+    {{#if user}}
+        <li class="channel channel--add-new col span_6">
+            <a href="#">
+                <div class="channel-image"></div>
+                <h3>New channel</h3>
+            </a>
+        </li>
+    {{/if}}
+</ul>

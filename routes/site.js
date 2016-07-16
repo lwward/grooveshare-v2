@@ -4,7 +4,15 @@ module.exports = function(app) {
 
     // Homepage
     app.get('/', function(req, res, next) {
-        res.render('index');
+        if (!req.isAuthenticated()) {
+            // Check if there is an unfinished user profile
+            if (req.session.loginUser || req.session.newUser) {
+                res.redirect('/auth');
+                return;
+            }
+        }
+
+        res.render('index', { channels: channels.channels, classes: ['index'] });
     });
 
     // Channel page
@@ -19,7 +27,7 @@ module.exports = function(app) {
 
         // channel.join();
 
-        res.render('channel', { channel: channel });
+        res.render('channel', { channel: channel, classes: ['channel'] });
     });
 
 };

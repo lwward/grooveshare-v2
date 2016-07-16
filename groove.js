@@ -103,6 +103,10 @@ app.use(function (req, res, next) {
 
     res.locals.title = config.site.title;
 
+    // Set correct rendering layout based on request
+    var layout = req.xhr ? false : 'layout';
+    res.locals.layout = layout;
+
     next();
 });
 
