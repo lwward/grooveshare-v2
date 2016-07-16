@@ -21,7 +21,7 @@ var fs = require('fs'),
 
 // library.add('Sorry you\'re sick', 'Ted Hawkins');
 // channels.create('Friday!');
-// channels.addSong('metal-mash', 'Double nature', 'Mustasch').then(function() {
+// channels.addSong('metal-mash', 'Rose for epona', 'Eluveitie').then(function() {
 //     console.log('Woo we did it');
 // }, function() {
 //     console.log('Boo');
@@ -61,7 +61,7 @@ app.set('views', __dirname + '/client/views');
 app.use(compression());
 
 // Serve static files
-app.use('/images', express.static('data/images'));
+app.use('/images/channels', express.static('data/images'));
 app.use('/music', express.static('data/music'));
 app.use('/views', express.static('client/views'));
 app.use(express.static('client/static'));

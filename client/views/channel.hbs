@@ -1,45 +1,47 @@
-<audio></audio>
-<div id="sidebar">
-    <div class="sidebar-content">
-        <div class="tracklist-search">
+<div id="player">
+    <audio></audio>
+    <div id="sidebar">
+        <div class="sidebar-content">
+            <div class="tracklist-search">
+                <input type="text" placeholder="Search" autocomplete="off"/>
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+        <div class="sidebar-icons">
+            <div class="channel-info show-sidebar">
+                <div class="channel-image" style="background-image: url('/images/channels/{{ id }}.jpg');"></div>
+                <div class="channel-info-details">
+                    <h3>{{ title }}</h3>
+                    <span class="channel-info-songs">{{ tracks }}</span> Songs |
+                    <span class="channel-info-listeners">{{ listeners }}</span> Listeners
+                </div>
+            </div>
+            <i class="fa fa-volume-off toggle-mute"></i>
+            <span>Toggle mute</span>
+            <i class="fa fa-lastfm-square lastfm-scrobble {{#if scrobbling}}lastfm-scrobble-active{{/if}}"></i>
+            <span>Enable scrobbling</span>
+        </div>
+    </div>
+
+    <div id="search">
+        <div class="search-container">
             <input type="text" placeholder="Search" autocomplete="off"/>
             <i class="fa fa-search"></i>
         </div>
     </div>
-    <div class="sidebar-icons">
-        <div class="channel-info show-sidebar">
-            <div class="channel-image" style="background-image: url('/images/channels/{{ id }}.jpg');"></div>
-            <div class="channel-info-details">
-                <h3>{{ title }}</h3>
-                <span class="channel-info-songs">{{ tracks }}</span> Songs |
-                <span class="channel-info-listeners">{{ listeners }}</span> Listeners
+
+    <div class="track-container">
+        <div class="track-details">
+            <div class="album-art">
+                <img src="" alt=""/>
+                <div class="progress"></div>
             </div>
+            <h1 class="track"></h1>
+            <h3 class="artist"></h3>
         </div>
-        <i class="fa fa-volume-off toggle-mute"></i>
-        <span>Toggle mute</span>
-        <i class="fa fa-lastfm-square lastfm-scrobble {{#if scrobbling}}lastfm-scrobble-active{{/if}}"></i>
-        <span>Enable scrobbling</span>
-    </div>
-</div>
-
-<div id="search">
-    <div class="search-container">
-        <input type="text" placeholder="Search" autocomplete="off"/>
-        <i class="fa fa-search"></i>
-    </div>
-</div>
-
-<div class="track-container">
-    <div class="track-details">
-        <div class="album-art">
-            <img src="" alt=""/>
-            <div class="progress"></div>
+        <div class="track-controls">
+            <span class="control control--like"><i class="fa fa-thumbs-up"></i><span class="count">0</span></span>
+            <span class="control control--dislike"><i class="fa fa-thumbs-down"></i><span class="count">0</span></span>
         </div>
-        <h1 class="track"></h1>
-        <h3 class="artist"></h3>
-    </div>
-    <div class="track-controls">
-        <span class="control control--like"><i class="fa fa-thumbs-up"></i><span class="count">0</span></span>
-        <span class="control control--dislike"><i class="fa fa-thumbs-down"></i><span class="count">0</span></span>
     </div>
 </div>

@@ -1,12 +1,16 @@
 function channel(id) {
     var self = this;
 
+    this.tracklist = [];
+
     // Connect to channel
     socket.emit('channel.join', id);
 
     socket.on('channel.join', function(data) {
-        console.log('Joined', data);
         self.render(data);
+
+        // Get tracklist
+        socket.emit('channel.tracklist');
     });
 
     socket.on('channel.play', function(data) {
@@ -17,6 +21,10 @@ function channel(id) {
                 self.player.play(data.track, data.position);
             }, 100);
         }
+    });
+
+    socket.on('channel.tracklist', function(data) {
+        self.tracklist = data;
     });
 
     this.render = function(data) {
@@ -76,15 +84,55 @@ function channel(id) {
         });
     }
 
+    var tmplTrackList = Handlebars.getTemplate('channel-tracklist');
+    this.renderTracklist = function() {
+        // Build and sort basic tracklist
+        var tracks = [];
+        for (var track in this.tracklist) {
+            tracks.push(this.tracklist[track]);
+        }
+        tracks.sort(playlistSort);
 
+        var tracklist = {};
+        for (var trackID in tracks) {
+            track = tracks[trackID];
 
-    this.renderTracklist = function(tracklist) {
+            console.log(track);
+
+            var letter = track.artist.replace(/^the /i,"")[0].toUpperCase();
+            if (!/^[A-Z]$/.test(letter)) {
+                letter = '#';
+            }
+
+            if (!(letter in tracklist)) {
+                tracklist[letter] = [];
+            }
+            tracklist[letter].push(track);
+        }
+
+        console.log(tracklist);
+
         $('#sidebar .sidebar-content > :not(.tracklist-search)').remove();
-        // $('#sidebar .sidebar-content').append(tmplTrackList({tracklist: tracklist, queue: queue}));
+        $('#sidebar .sidebar-content').append(tmplTrackList({tracklist: tracklist, queue: []}));
         $('#sidebar .sidebar-content').scrollTop(0);
 
         $('body').addClass('showing-sidebar');
     }
+
+    function playlistSort(a, b) {
+        var o1 = a.artist.replace(/^the /i,"").toLowerCase();
+        var o2 = b.artist.replace(/^the /i,"").toLowerCase();
+
+        var p1 = a.title.toLowerCase();
+        var p2 = b.title.toLowerCase();
+
+        if (o1 < o2) return -1;
+        if (o1 > o2) return 1;
+        if (p1 < p2) return -1;
+        if (p1 > p2) return 1;
+        return 0;
+    }
+
 
 
 }

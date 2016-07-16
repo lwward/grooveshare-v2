@@ -1,0 +1,38 @@
+ {{#if queue}}
+ <h1>Queue</h1>
+ <ul class="sidebar-queue">
+     {{#each queue}}
+        <li {{#if auto}}class="autoqueued"{{/if}}>
+            <a href="https://www.youtube.co.uk/watch?v={{ youtube }}" class="play-youtube" target="_blank">
+                <i class="fa fa-youtube-play"></i>
+            </a>
+            <strong>{{ title }}</strong> - {{ artist }}
+        </li>
+     {{/each}}
+ </ul>
+ {{/if}}
+ <h1>Tracklist</h1>
+ <ul class="sidebar-tracklist-letters">
+    {{#each tracklist}}
+        <li data-target-letter="{{ @ key }}">{{ @ key }}</li>
+    {{/each}}
+ </ul>
+ <ul class="sidebar-tracklist">
+     {{#each tracklist}}
+        <li class="letter" data-letter="{{ @key }}">{{ @key }}</li>
+        {{#each .}}
+            <li data-added="{{ added }}" data-up="{{ up }}" data-down="{{ down }}">
+                <a href="#" data-id="{{ id }}" class="queue-add">
+                    <i class="fa fa-plus"></i>
+                </a>
+                {{#if meta.youtube}}
+                    <a href="https://www.youtube.co.uk/watch?v={{ meta.youtube }}" class="play-youtube" target="_blank">
+                        <i class="fa fa-youtube-play"></i>
+                    </a>
+                {{/if}}
+                <strong>{{ title }}</strong> - {{ artist }}
+            </li>
+        {{/each}}
+     {{/each}}
+ </ul>
+ <div class="back-to-top"><i class="fa fa-chevron-up"></i></div>
